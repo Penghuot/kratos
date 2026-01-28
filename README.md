@@ -19,6 +19,7 @@ Ory Kratos is an API first identity and user management system for cloud native 
 
 **Table of contents**
 
+- [Ory Kratos is an API first identity and user management system for cloud native applications. It centralizes login, registration, recovery, verification, and profile management flows so your services consume them instead of reimplementing them.](#ory-kratos-is-an-api-first-identity-and-user-management-system-for-cloud-native-applications-it-centralizes-login-registration-recovery-verification-and-profile-management-flows-so-your-services-consume-them-instead-of-reimplementing-them)
 - [What is Ory Kratos?](#what-is-ory-kratos)
   - [Why Ory Kratos](#why-ory-kratos)
 - [Migrating from Auth0, Okta, and similar providers](#migrating-from-auth0-okta-and-similar-providers)
