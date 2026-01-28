@@ -5,7 +5,6 @@ dsn: ${DSN}
 serve:
   public:
     base_url: ${RAILWAY_PUBLIC_URL}
-    port: ${PORT:-4433}
     cors:
       enabled: true
       allowed_origins:
@@ -20,6 +19,8 @@ serve:
         - Authorization
         - Cookie
         - Content-Type
+        - X-Session-Token
+        - X-CSRF-Token
       exposed_headers:
         - Content-Type
         - Set-Cookie
