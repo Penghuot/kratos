@@ -5,6 +5,7 @@ dsn: ${DATABASE_URL}
 serve:
   public:
     base_url: ${RAILWAY_PUBLIC_URL}
+    port: ${PORT:-4433}
     cors:
       enabled: true
       allowed_origins:
