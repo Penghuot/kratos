@@ -1,12 +1,14 @@
-FROM oryd/kratos:v1.3.0
+FROM oryd/kratos:v25.4.0
 
-# Copy configs
-COPY kratos.yml /etc/config/kratos/kratos.yml
-COPY identity.schema.json /etc/config/kratos/identity.schema.json
+# Install envsubst for config variable substitution
+USER root
+RUN apk add --no-cache gettext
+USER ory
 
-# Copy entrypoint script with permissions set at copy time
-COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
+WORKDIR /etc/kratos
 
-EXPOSE 4433 4434
+COPY kratos.yml /etc/kratos/kratos.yml
+COPY identity.schema.json /etc/kratos/identity.schema.json
+COPY --chmod=755 entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]

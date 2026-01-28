@@ -1,43 +1,11 @@
 #!/bin/sh
 set -e
 
-echo "===================================="
-echo "Ory Kratos Startup Script"
-echo "===================================="
+# Substitute environment variables in the config file
+envsubst < /etc/kratos/kratos.yml > /tmp/kratos.yml
 
-# Check required environment variables
-if [ -z "$DATABASE_URL" ]; then
-    echo "ERROR: DATABASE_URL is not set"
-    exit 1
-fi
+# Run DB migrations
+kratos -c /tmp/kratos.yml migrate sql -e --yes
 
-# Railway uses 'postgresql://' but Kratos needs 'postgres://'
-# Transform the DATABASE_URL if needed
-export DSN=$(echo "$DATABASE_URL" | sed 's/^postgresql:/postgres:/')
-
-echo "DATABASE_URL is set"
-echo "DSN configured for Kratos"
-echo "Running database migrations..."
-echo ""
-
-# Run migrations with -e flag to read DSN from environment
-kratos migrate sql -e --yes -c /etc/config/kratos/kratos.yml
-
-if [ $? -eq 0 ]; then
-    echo ""
-    echo "✅ Migrations completed successfully!"
-else
-    echo ""
-    echo "❌ Migration failed!"
-    exit 1
-fi
-
-echo ""
-echo "Starting Kratos server..."
-echo "===================================="
-echo "Public API will be available on port ${PORT:-4433}"
-echo "Admin API will be available on port 4434"
-echo ""
-
-# Start Kratos server
-exec kratos serve -c /etc/config/kratos/kratos.yml --dev --watch-courier
+# Start Kratos
+kratos -c /tmp/kratos.yml serve --dev
