@@ -1,46 +1,19 @@
 # Dockerfile for Ory Kratos Backend
-# This Dockerfile builds Kratos from your forked repository
+# Using official Ory Kratos Docker image
 # Railway will clone the repo and use this Dockerfile to build
 
-FROM golang:1.23-alpine AS builder
-
-# Install build dependencies
-RUN apk add --no-cache git build-base
-
-# Set working directory
-WORKDIR /app
-
-# Copy the entire repo (Railway clones it for us)
-COPY . .
-
-# Download dependencies
-RUN go mod download
-
-# Build Kratos binary
-RUN go build -o kratos .
-
-# Final stage - minimal runtime image
-FROM alpine:latest
-
-# Install ca-certificates for HTTPS
-RUN apk add --no-cache ca-certificates
-
-# Copy the binary from builder
-COPY --from=builder /app/kratos /usr/local/bin/kratos
+FROM oryd/kratos:v1.3.0
 
 # Copy the kratos.yml configuration
-COPY kratos.yml /etc/kratos/kratos.yml
+COPY kratos.yml /etc/config/kratos/kratos.yml
 
 # Copy the identity schema
-COPY identity.schema.json /etc/kratos/identity.schema.json
-
-# Set working directory
-WORKDIR /etc/kratos
+COPY identity.schema.json /etc/config/kratos/identity.schema.json
 
 # Expose Kratos ports
 # 4433 - Public API
 # 4434 - Admin API
 EXPOSE 4433 4434
 
-# Run Kratos serve
-CMD ["kratos", "serve", "-c", "/etc/kratos/kratos.yml", "--dev", "--watch-courier"]
+# Run Kratos serve with configuration
+CMD ["serve", "-c", "/etc/config/kratos/kratos.yml", "--dev", "--watch-courier"]
