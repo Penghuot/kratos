@@ -10,10 +10,14 @@ COPY kratos.yml /etc/config/kratos/kratos.yml
 # Copy the identity schema
 COPY identity.schema.json /etc/config/kratos/identity.schema.json
 
+# Copy entrypoint script that handles migrations
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod 755 /usr/local/bin/entrypoint.sh
+
 # Expose Kratos ports
 # 4433 - Public API
 # 4434 - Admin API
 EXPOSE 4433 4434
 
-# Run Kratos serve with configuration
-CMD ["serve", "-c", "/etc/config/kratos/kratos.yml", "--dev", "--watch-courier"]
+# Use entrypoint script to run migrations then start server
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
