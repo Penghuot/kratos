@@ -5,10 +5,11 @@ USER root
 RUN apk add --no-cache gettext
 USER ory
 
-WORKDIR /etc/config/kratos
+WORKDIR /etc/kratos
 
-COPY kratos.yml /etc/config/kratos/kratos.yml
-COPY identity.schema.json /etc/config/kratos/identity.schema.json
+COPY kratos.yml /etc/kratos/kratos.yml
+COPY identity.schema.json /etc/kratos/identity.schema.json
 COPY --chmod=755 entrypoint.sh /entrypoint.sh
+
 
 ENTRYPOINT ["/entrypoint.sh"]
