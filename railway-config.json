@@ -1,0 +1,39 @@
+{
+  "backend": {
+    "service_name": "kratos-backend",
+    "dockerfile": "Dockerfile.backend",
+    "branch": "railway-deployment",
+    "environment_variables": {
+      "DATABASE_URL": "${{Postgres.DATABASE_URL}}",
+      "RAILWAY_PUBLIC_URL": "https://kratos-backend-production-XXXX.up.railway.app",
+      "KRATOS_BROWSER_URL": "https://kratos-ui-production-YYYY.up.railway.app",
+      "COOKIE_DOMAIN": ".up.railway.app",
+      "MAILTRAP_SMTP_URI": "smtp://YOUR_MAILTRAP_USERNAME:YOUR_MAILTRAP_PASSWORD@smtp.mailtrap.io:2525",
+      "SECRETS_COOKIE": "WFlAZojiZD2XCDwYQBu+h7U8nIgabVLU",
+      "SECRETS_CIPHER": "r47MgCzkrrf2iPZetPunZ012gcmvsqM0"
+    }
+  },
+  "frontend": {
+    "service_name": "kratos-ui",
+    "dockerfile": "Dockerfile.frontend",
+    "branch": "railway-deployment",
+    "environment_variables": {
+      "KRATOS_PUBLIC_URL": "https://kratos-backend-production-XXXX.up.railway.app",
+      "KRATOS_BROWSER_URL": "https://kratos-ui-production-YYYY.up.railway.app",
+      "COOKIE_SECRET": "JN+QYafjMne3wDs4dITiHB+r3kWgqc2i",
+      "CSRF_COOKIE_NAME": "ory_csrf_ui",
+      "CSRF_COOKIE_SECRET": "MH1ZG/sspzugq1dLJT6XcR0MiHyqFrCJ",
+      "PORT": "3000"
+    }
+  },
+  "instructions": {
+    "update_required": [
+      "Replace XXXX with your backend Railway URL",
+      "Replace YYYY with your frontend Railway URL",
+      "Replace YOUR_MAILTRAP_USERNAME with your Mailtrap username",
+      "Replace YOUR_MAILTRAP_PASSWORD with your Mailtrap password"
+    ],
+    "mailtrap_help": "Get credentials from: https://mailtrap.io/inboxes > SMTP Settings",
+    "generated_secrets": "All SECRETS_*, COOKIE_SECRET, and CSRF_COOKIE_SECRET have been pre-generated - use as-is"
+  }
+}

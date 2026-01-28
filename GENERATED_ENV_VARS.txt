@@ -1,0 +1,129 @@
+# Railway Environment Variables - READY TO USE
+# Generated: January 28, 2026
+# 
+# ⚠️ ONLY UPDATE THE ITEMS MARKED WITH "TODO"
+# All secrets have been generated for you!
+
+# ============================================================================
+# BACKEND SERVICE (kratos-backend)
+# ============================================================================
+
+# Database URL - Railway automatically provides this
+# ✅ USE THIS EXACT VALUE in Railway (it references the PostgreSQL plugin)
+DATABASE_URL=${{Postgres.DATABASE_URL}}
+
+# Backend Public URL
+# 🔄 TODO: After first deploy, replace XXXX with your actual backend Railway URL
+RAILWAY_PUBLIC_URL=https://kratos-backend-production-XXXX.up.railway.app
+
+# Frontend URL (for CORS and redirects)
+# 🔄 TODO: After first deploy, replace YYYY with your actual frontend Railway URL
+KRATOS_BROWSER_URL=https://kratos-ui-production-YYYY.up.railway.app
+
+# Cookie Domain - Keep this for Railway domains
+# ✅ USE THIS VALUE AS-IS
+COOKIE_DOMAIN=.up.railway.app
+
+# Mailtrap SMTP Connection
+# 🔄 TODO: Replace with your Mailtrap credentials
+# Get from: https://mailtrap.io/inboxes > SMTP Settings
+MAILTRAP_SMTP_URI=smtp://YOUR_MAILTRAP_USERNAME:YOUR_MAILTRAP_PASSWORD@smtp.mailtrap.io:2525
+
+# Secrets - GENERATED FOR YOU (32-char random strings)
+# ✅ USE THESE VALUES AS-IS
+SECRETS_COOKIE=WFlAZojiZD2XCDwYQBu+h7U8nIgabVLU
+SECRETS_CIPHER=r47MgCzkrrf2iPZetPunZ012gcmvsqM0
+
+# ============================================================================
+# FRONTEND SERVICE (kratos-ui)
+# ============================================================================
+
+# Backend API URL
+# 🔄 TODO: Replace XXXX with your backend Railway URL (same as RAILWAY_PUBLIC_URL)
+KRATOS_PUBLIC_URL=https://kratos-backend-production-XXXX.up.railway.app
+
+# Frontend URL (self-reference)
+# 🔄 TODO: Replace YYYY with your frontend Railway URL
+KRATOS_BROWSER_URL=https://kratos-ui-production-YYYY.up.railway.app
+
+# Cookie Secrets - GENERATED FOR YOU
+# ✅ USE THESE VALUES AS-IS
+COOKIE_SECRET=JN+QYafjMne3wDs4dITiHB+r3kWgqc2i
+CSRF_COOKIE_NAME=ory_csrf_ui
+CSRF_COOKIE_SECRET=MH1ZG/sspzugq1dLJT6XcR0MiHyqFrCJ
+
+# Port (Railway auto-detects, but you can specify)
+# ✅ OPTIONAL
+PORT=3000
+
+# ============================================================================
+# COPY-PASTE SUMMARY
+# ============================================================================
+
+## For Backend Service:
+##
+## DATABASE_URL=${{Postgres.DATABASE_URL}}
+## RAILWAY_PUBLIC_URL=https://kratos-backend-production-XXXX.up.railway.app
+## KRATOS_BROWSER_URL=https://kratos-ui-production-YYYY.up.railway.app
+## COOKIE_DOMAIN=.up.railway.app
+## MAILTRAP_SMTP_URI=smtp://YOUR_USERNAME:YOUR_PASSWORD@smtp.mailtrap.io:2525
+## SECRETS_COOKIE=WFlAZojiZD2XCDwYQBu+h7U8nIgabVLU
+## SECRETS_CIPHER=r47MgCzkrrf2iPZetPunZ012gcmvsqM0
+
+## For Frontend Service:
+##
+## KRATOS_PUBLIC_URL=https://kratos-backend-production-XXXX.up.railway.app
+## KRATOS_BROWSER_URL=https://kratos-ui-production-YYYY.up.railway.app
+## COOKIE_SECRET=JN+QYafjMne3wDs4dITiHB+r3kWgqc2i
+## CSRF_COOKIE_NAME=ory_csrf_ui
+## CSRF_COOKIE_SECRET=MH1ZG/sspzugq1dLJT6XcR0MiHyqFrCJ
+## PORT=3000
+
+# ============================================================================
+# WHAT YOU NEED TO UPDATE
+# ============================================================================
+
+# 1. Get Mailtrap credentials:
+#    - Go to https://mailtrap.io/inboxes
+#    - Click on your inbox
+#    - Go to "SMTP Settings" tab
+#    - Copy username and password
+#    - Format: smtp://username:password@smtp.mailtrap.io:2525
+
+# 2. After deploying backend service:
+#    - Go to Railway > Backend Service > Settings > Networking
+#    - Copy the public domain (e.g., kratos-backend-production-a1b2c3.up.railway.app)
+#    - Replace all "XXXX" with this value
+
+# 3. After deploying frontend service:
+#    - Go to Railway > Frontend Service > Settings > Networking
+#    - Copy the public domain (e.g., kratos-ui-production-d4e5f6.up.railway.app)
+#    - Replace all "YYYY" with this value
+
+# 4. Redeploy both services after updating URLs
+
+# ============================================================================
+# DEPLOYMENT STEPS REMINDER
+# ============================================================================
+
+# Step 1: Create Railway project
+# Step 2: Add PostgreSQL database
+# Step 3: Create backend service
+#         - Source: github.com/Penghuot/kratos (branch: railway-deployment)
+#         - Dockerfile: Dockerfile.backend
+#         - Add backend env vars above (use temporary URLs first)
+# Step 4: Note backend Railway URL
+# Step 5: Create frontend service
+#         - Source: github.com/Penghuot/kratos (branch: railway-deployment)
+#         - Dockerfile: Dockerfile.frontend
+#         - Add frontend env vars above (use backend URL from step 4)
+# Step 6: Note frontend Railway URL
+# Step 7: Update BOTH services with correct URLs
+# Step 8: Redeploy both services
+# Step 9: Run migration: kratos migrate sql -e --yes -c /etc/kratos/kratos.yml
+# Step 10: Test at your frontend URL!
+
+# ============================================================================
+# NEED HELP?
+# ============================================================================
+# See RAILWAY_DEPLOYMENT.md for detailed instructions
