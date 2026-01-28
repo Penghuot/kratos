@@ -1,6 +1,6 @@
 version: v1.2.0
 
-dsn: ${DATABASE_URL}
+dsn: ${DSN}
 
 serve:
   public:

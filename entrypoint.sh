@@ -11,7 +11,12 @@ if [ -z "$DATABASE_URL" ]; then
     exit 1
 fi
 
+# Railway uses 'postgresql://' but Kratos needs 'postgres://'
+# Transform the DATABASE_URL if needed
+export DSN=$(echo "$DATABASE_URL" | sed 's/^postgresql:/postgres:/')
+
 echo "DATABASE_URL is set"
+echo "DSN configured for Kratos"
 echo "Running database migrations..."
 echo ""
 
