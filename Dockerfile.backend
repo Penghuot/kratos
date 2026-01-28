@@ -2,7 +2,7 @@
 # This Dockerfile builds Kratos from your forked repository
 # Railway will clone the repo and use this Dockerfile to build
 
-FROM golang:1.21-alpine AS builder
+FROM golang:1.23-alpine AS builder
 
 # Install build dependencies
 RUN apk add --no-cache git build-base
