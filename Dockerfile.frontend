@@ -2,7 +2,7 @@
 # Using the official Ory Kratos selfservice UI image
 # The UI is maintained as a separate project by Ory
 
-FROM oryd/kratos-selfservice-ui-node:v1.2.0
+FROM oryd/kratos-selfservice-ui-node:v1.3.0
 
 # Environment variables will be set by Railway
 # - KRATOS_PUBLIC_URL
