@@ -1,23 +1,12 @@
-# Dockerfile for Ory Kratos Backend
-# Using official Ory Kratos Docker image
-# Railway will clone the repo and use this Dockerfile to build
-
 FROM oryd/kratos:v1.3.0
 
-# Copy the kratos.yml configuration
+# Copy configs
 COPY kratos.yml /etc/config/kratos/kratos.yml
-
-# Copy the identity schema
 COPY identity.schema.json /etc/config/kratos/identity.schema.json
 
-# Copy entrypoint script that handles migrations
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod 755 /usr/local/bin/entrypoint.sh
+# Copy entrypoint script with permissions set at copy time
+COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
 
-# Expose Kratos ports
-# 4433 - Public API
-# 4434 - Admin API
 EXPOSE 4433 4434
 
-# Use entrypoint script to run migrations then start server
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
